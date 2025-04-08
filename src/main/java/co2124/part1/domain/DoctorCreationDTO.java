@@ -1,5 +1,6 @@
 package co2124.part1.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
@@ -12,6 +13,7 @@ public class DoctorCreationDTO {
     @Email(message = "Email should be valid")
     String email;
     @NotBlank(message = "Phone number is required")
+    @JsonProperty("phone_number")
     String phoneNumber;
 
     public @NotBlank(message = "Name is required") String getName() {
