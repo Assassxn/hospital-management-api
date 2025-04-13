@@ -9,4 +9,5 @@ import java.util.List;
 public interface PatientRepository extends CrudRepository<Patient, Long> {
     List<Patient> findAll();
     Patient findPatientById(Long id);
+    boolean existsById(Long id);
 }

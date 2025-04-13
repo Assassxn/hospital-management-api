@@ -20,15 +20,15 @@ public class AppointmentRestController {
         return appointmentRepository.findAll();
     }
 
-    @PostMapping
-    public Appointment addAppointment(AppointmentCreationDTO appointment) {
-        Appointment newAppointment = new Appointment();
-        newAppointment.setAppointmentDate(appointment.getAppointmentDate());
-
-
-
-        return appointmentRepository.save(appointment);
-    }
+//    @PostMapping
+//    public Appointment addAppointment(AppointmentCreationDTO appointment) {
+//        Appointment newAppointment = new Appointment();
+////        newAppointment.setAppointmentDate(appointment.getAppointmentDate());
+////
+////
+////
+////        return appointmentRepository.save(appointment);
+//    }
 
     @GetMapping("/{id}")
     public Appointment getAppointmentById(Long id) {

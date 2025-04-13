@@ -53,7 +53,7 @@ public class DoctorRestController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateDoctor(@PathVariable Long id, @RequestBody Doctor doctor) {
+    public ResponseEntity<?> updateDoctor(@PathVariable Long id, @Valid @RequestBody DoctorCreationDTO doctor) {
         Doctor existingDoctor = doctorRepository.findDoctorById(id);
         if (existingDoctor == null) {
             CustomValidationErrorResponse error = new CustomValidationErrorResponse(
