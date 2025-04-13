@@ -14,6 +14,9 @@ public class PatientIdExistsValidator implements ConstraintValidator<PatientIdEx
 
     @Override
     public boolean isValid(Long patientId, ConstraintValidatorContext context) {
+        if (patientId == null) {
+            return true; // null values are handled by @NotNull
+        }
         return patientRepository.existsById(patientId);
     }
 }

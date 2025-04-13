@@ -26,14 +26,15 @@ public class DoctorRestController {
     }
 
     @PostMapping
-    public Doctor addDoctor(@Valid @RequestBody DoctorCreationDTO doctor) {
+    public ResponseEntity<Doctor> addDoctor(@Valid @RequestBody DoctorCreationDTO doctor) {
         Doctor newDoctor = new Doctor();
         newDoctor.setName(doctor.getName());
         newDoctor.setSpecialisation(doctor.getSpecialisation());
         newDoctor.setEmail(doctor.getEmail());
         newDoctor.setPhoneNumber(doctor.getPhoneNumber());
 
-        return doctorRepository.save(newDoctor);
+        Doctor createdDoctor = doctorRepository.save(newDoctor);
+        return ResponseEntity.created(null).body(createdDoctor);
     }
 
     @GetMapping("/{id}")

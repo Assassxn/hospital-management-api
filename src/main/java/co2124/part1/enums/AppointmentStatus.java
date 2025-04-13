@@ -1,5 +1,7 @@
 package co2124.part1.enums;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum AppointmentStatus {
     SCHEDULED("Scheduled"),
     COMPLETED("Completed"),
@@ -11,6 +13,7 @@ public enum AppointmentStatus {
         this.displayName = displayName;
     }
 
+    @JsonValue
     public String getDisplayName() {
         return displayName;
     }

@@ -1,5 +1,6 @@
 package co2124.part1.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class Patient {
     String address;
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JsonManagedReference("patient-appointments")
     private List<Appointment> appointments = new ArrayList<>();
 
     public Long getId() {

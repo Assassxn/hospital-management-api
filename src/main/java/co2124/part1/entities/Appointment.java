@@ -1,6 +1,7 @@
 package co2124.part1.entities;
 
 import co2124.part1.enums.AppointmentStatus;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
@@ -16,10 +17,12 @@ public class Appointment {
 
     @ManyToOne
     @JoinColumn(name = "patient_id", nullable = false)
+    @JsonBackReference("patient-appointments")
     private Patient patient;
 
     @ManyToOne
     @JoinColumn(name = "doctor_id", nullable = false)
+    @JsonBackReference("doctor-appointments")
     private Doctor doctor;
 
     @OneToOne(mappedBy = "appointment", cascade = CascadeType.ALL, orphanRemoval = true)
