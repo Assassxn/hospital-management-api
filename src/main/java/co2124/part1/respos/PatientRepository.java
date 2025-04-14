@@ -1,6 +1,5 @@
 package co2124.part1.respos;
 
-import co2124.part1.domain.PatientCreationDTO;
 import co2124.part1.entities.Patient;
 import org.springframework.data.repository.CrudRepository;
 

@@ -17,15 +17,14 @@ public class Appointment {
 
     @ManyToOne
     @JoinColumn(name = "patient_id", nullable = false)
-    @JsonBackReference("patient-appointments")
     private Patient patient;
 
     @ManyToOne
     @JoinColumn(name = "doctor_id", nullable = false)
-    @JsonBackReference("doctor-appointments")
     private Doctor doctor;
 
     @OneToOne(mappedBy = "appointment", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
     private MedicalRecord medicalRecord;
 
     public Long getId() {

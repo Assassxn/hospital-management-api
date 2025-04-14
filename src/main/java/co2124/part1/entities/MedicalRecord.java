@@ -1,5 +1,6 @@
 package co2124.part1.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
@@ -9,6 +10,7 @@ public class MedicalRecord {
     @Id
     @GeneratedValue
     Long id;
+    @JsonProperty("record_date")
     Timestamp recordDate;
     String diagnosis;
     String treatment;

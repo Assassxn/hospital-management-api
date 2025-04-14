@@ -31,4 +31,44 @@ public class AppointmentUpdateDTO {
     @NotBlank(message = "Status is required")
     @ValidEnum(enumClass = AppointmentStatus.class, message = "Status must be one of the following: SCHEDULED, COMPLETED, CANCELLED")
     private String status;
+
+    public @NotNull(message = "Appointment Date is required") Timestamp getAppointmentDate() {
+        return appointmentDate;
+    }
+
+    public void setAppointmentDate(@NotNull(message = "Appointment Date is required") Timestamp appointmentDate) {
+        this.appointmentDate = appointmentDate;
+    }
+
+    public @NotBlank(message = "Notes are required") String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(@NotBlank(message = "Notes are required") String notes) {
+        this.notes = notes;
+    }
+
+    public @NotNull(message = "Doctor ID is required") Long getDoctorId() {
+        return doctorId;
+    }
+
+    public void setDoctorId(@NotNull(message = "Doctor ID is required") Long doctorId) {
+        this.doctorId = doctorId;
+    }
+
+    public @NotNull(message = "Patient ID is required") Long getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(@NotNull(message = "Patient ID is required") Long patientId) {
+        this.patientId = patientId;
+    }
+
+    public @NotBlank(message = "Status is required") String getStatus() {
+        return status;
+    }
+
+    public void setStatus(@NotBlank(message = "Status is required") String status) {
+        this.status = status;
+    }
 }

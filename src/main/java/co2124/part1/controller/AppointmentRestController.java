@@ -1,6 +1,7 @@
 package co2124.part1.controller;
 
 import co2124.part1.domain.AppointmentCreationDTO;
+import co2124.part1.domain.AppointmentUpdateDTO;
 import co2124.part1.entities.Appointment;
 import co2124.part1.entities.Doctor;
 import co2124.part1.entities.MedicalRecord;
@@ -71,7 +72,7 @@ public class AppointmentRestController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateAppointment(@PathVariable Long id, @RequestBody Appointment appointment) {
+    public ResponseEntity<?> updateAppointment(@PathVariable Long id, @Valid @RequestBody AppointmentUpdateDTO appointment) {
         Appointment existingAppointment = appointmentRepository.findAppointmentById(id);
         if (existingAppointment == null) {
             CustomValidationErrorResponse error = new CustomValidationErrorResponse(
@@ -84,27 +85,58 @@ public class AppointmentRestController {
             return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
         }
 
+
+        Doctor doctor = doctorRepository.findDoctorById(appointment.getDoctorId());
+        Patient patient = patientRepository.findPatientById(appointment.getPatientId());
+
+        existingAppointment.setDoctor(doctor);
+        existingAppointment.setPatient(patient);
+        existingAppointment.setNotes(appointment.getNotes());
         existingAppointment.setAppointmentDate(appointment.getAppointmentDate());
-        existingAppointment.setDoctor(appointment.getDoctor());
-        existingAppointment.setPatient(appointment.getPatient());
+        existingAppointment.setStatus(appointment.getStatus());
+
         Appointment newAppointment = appointmentRepository.save(existingAppointment);
         return ResponseEntity.ok(newAppointment);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteAppointment(@PathVariable Long id) {
+    public ResponseEntity<?> deleteAppointment(@PathVariable Long id) {
         Appointment existingAppointment = appointmentRepository.findAppointmentById(id);
-        if (existingAppointment != null) {
-            appointmentRepository.delete(existingAppointment);
+        if (existingAppointment == null) {
+            CustomValidationErrorResponse error = new CustomValidationErrorResponse(
+                    LocalDateTime.now(),
+                    HttpStatus.NOT_FOUND.value(),
+                    HttpStatus.NOT_FOUND.getReasonPhrase(),
+                    List.of("No Appointment exists with ID: " + id)
+            );
+            return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
         }
+
+        appointmentRepository.delete(existingAppointment);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{id}/medical-record")
-    public MedicalRecord getMedicalRecordByAppointmentId(@PathVariable Long id) {
+    public ResponseEntity<?> getMedicalRecordByAppointmentId(@PathVariable Long id) {
         Appointment appointment = appointmentRepository.findAppointmentById(id);
-        if (appointment != null) {
-            return appointment.getMedicalRecord();
+        if (appointment == null) {
+            CustomValidationErrorResponse error = new CustomValidationErrorResponse(
+                    LocalDateTime.now(),
+                    HttpStatus.NOT_FOUND.value(),
+                    HttpStatus.NOT_FOUND.getReasonPhrase(),
+                    List.of("No Appointment exists with ID: " + id)
+            );
+            return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
         }
-        return null;
+        if (appointment.getMedicalRecord() == null) {
+            CustomValidationErrorResponse error = new CustomValidationErrorResponse(
+                    LocalDateTime.now(),
+                    HttpStatus.NOT_FOUND.value(),
+                    HttpStatus.NOT_FOUND.getReasonPhrase(),
+                    List.of("No Medical Record exists for Appointment ID: " + id)
+            );
+            return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity.ok(appointment.getMedicalRecord());
     }
 }
