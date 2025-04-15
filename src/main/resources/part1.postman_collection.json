@@ -1,0 +1,555 @@
+{
+	"info": {
+		"_postman_id": "9efe2fad-c01a-4324-a0e0-e93b204588a0",
+		"name": "CW1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "15603119"
+	},
+	"item": [
+		{
+			"name": "Patients",
+			"item": [
+				{
+					"name": "Get All Patients Success",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/patients"
+					},
+					"response": []
+				},
+				{
+					"name": "Create patient Success",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"hello\",\r\n    \"email\":\"a@a.com\",\r\n    \"phone_number\":\"+6546546546546\",\r\n    \"address\":\"fake address\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/patients"
+					},
+					"response": []
+				},
+				{
+					"name": "Create patient Failure",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/patients"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Patient By Id Failure",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/patients/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Patient By Id Success",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/patients/302"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Patient Failure - not found",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"address\": \"new address\",\r\n    \"email\":\"aasd@test.com\",\r\n    \"name\":\"newPatientName\",\r\n    \"phone_number\":\"+65432189765416\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/patients/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Patient Success",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"address\": \"new address\",\r\n    \"email\":\"aasd@test.com\",\r\n    \"name\":\"newPatientName\",\r\n    \"phone_number\":\"+65432189765416\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/patients/302"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Patient Failure - not found",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/patients/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Patient Success",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/patients/52"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Patient Appointments Success",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/patients/3/appointments"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Patient Appointments Failure",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/patients/1/appointments"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Patient Medical Records Success",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/patients/3/medical-records"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Patient Medical Records Failure",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/patients/3/medical-records"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Doctors",
+			"item": [
+				{
+					"name": "Get All Doctors Success",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/doctors"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Doctor Success",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"specialisation\":\"this is a specialisation\",\r\n    \"email\":\"a@gm.com\",\r\n    \"name\":\"Doctor name\",\r\n    \"phone_number\":\"+65465465464\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/doctors"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Doctor Failure",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/doctors"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Doctor By Id Success",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/doctors/2"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Doctor By Id Failure",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/doctors/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Doctor By Id Failure",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/doctors/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Doctor By Id Success",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"doctor name\",\r\n    \"email\":\"hi@a.c\",\r\n    \"specialisation\":\"a\",\r\n    \"phone_number\":\"+465646546546\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/doctors/3"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Doctor By Id Failure",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"doctor name\",\r\n    \"email\":\"hi@a.c\",\r\n    \"specialisation\":\"a\",\r\n    \"phone_number\":\"+465646546546\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/doctors/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Doctor By Id Success",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"doctor name\",\r\n    \"email\":\"hi@a.c\",\r\n    \"specialisation\":\"a\",\r\n    \"phone_number\":\"+465646546546\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/doctors/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Doctor Appointments Success",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/doctors/2/appointments"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Doctor Appointments Failure",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/doctors/1231231232/appointments"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Appointments",
+			"item": [
+				{
+					"name": "Create Appointment Success",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"doctor_id\":2,\r\n    \"patient_id\":104,\r\n    \"appointment_date\":\"2025-04-13T16:08:44Z\",\r\n    \"notes\":\"wsg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/appointments"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Appointment Failure",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/appointments"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Appointments Success",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/appointments"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Appointment By Id Success",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/appointments/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Appointment By Id Failure",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/appointments/1123141234"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Appointment By Id Success",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"doctor_id\":2,\r\n    \"patient_id\":104,\r\n    \"appointment_date\":\"2025-04-13T16:08:44Z\",\r\n    \"notes\":\"wsg\",\r\n    \"status\":\"COMPLETED\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/appointments/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Appointment By Id Failure",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"doctor_id\":2,\r\n    \"patient_id\":104,\r\n    \"appointment_date\":\"2025-04-13T16:08:44Z\",\r\n    \"notes\":\"wsg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/appointments/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Appointment By Id Success",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"doctor_id\":2,\r\n    \"patient_id\":104,\r\n    \"appointment_date\":\"2025-04-13T16:08:44Z\",\r\n    \"notes\":\"wsg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/appointments/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Appointment By Id Failure",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"doctor_id\":2,\r\n    \"patient_id\":104,\r\n    \"appointment_date\":\"2025-04-13T16:08:44Z\",\r\n    \"notes\":\"wsg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/appointments/11231242134"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Appointment's Medical Record Success",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"doctor_id\":2,\r\n    \"patient_id\":104,\r\n    \"appointment_date\":\"2025-04-13T16:08:44Z\",\r\n    \"notes\":\"wsg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/appointments/1/medical-record"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Appointment's Medical Record Failure",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"doctor_id\":2,\r\n    \"patient_id\":104,\r\n    \"appointment_date\":\"2025-04-13T16:08:44Z\",\r\n    \"notes\":\"wsg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/appointments/1002/medical-record"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Medical Records",
+			"item": [
+				{
+					"name": "Create a Medical Record Success",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"treatment\":\"drink Water\",\r\n    \"notes\":\"patient has some allergies...\",\r\n    \"diagnosis\":\"cancer\",\r\n    \"appointment_id\":1002\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/medical-records"
+					},
+					"response": []
+				},
+				{
+					"name": "Create a Medical Record Failure",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"treatment\":\"drink Water\",\r\n    \"notes\":\"patient has some allergies...\",\r\n    \"diagnosis\":\"cancer\",\r\n    \"appointment_id\":1002123\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/medical-records"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
