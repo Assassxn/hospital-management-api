@@ -21,8 +21,18 @@ public class DoctorRestController {
     private DoctorRepository doctorRepository;
 
     @GetMapping
-    public List<Doctor> getAllDoctors() {
-        return doctorRepository.findAll();
+    public ResponseEntity<?> getAllDoctors() {
+        List<Doctor> doctors = doctorRepository.findAll();
+        if (doctors.isEmpty()) {
+            CustomValidationErrorResponse error = new CustomValidationErrorResponse(
+                    LocalDateTime.now(),
+                    HttpStatus.NO_CONTENT.value(),
+                    HttpStatus.NO_CONTENT.getReasonPhrase(),
+                    List.of("No doctors exist")
+            );
+            return new ResponseEntity<>(error, HttpStatus.NO_CONTENT);
+        }
+        return ResponseEntity.ok(doctors);
     }
 
     @PostMapping

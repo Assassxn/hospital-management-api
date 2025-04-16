@@ -32,8 +32,18 @@ public class AppointmentRestController {
     private DoctorRepository doctorRepository;
 
     @GetMapping
-    public List<Appointment> getAllAppointments() {
-        return appointmentRepository.findAll();
+    public ResponseEntity<?> getAllAppointments() {
+        List<Appointment> appointments = appointmentRepository.findAll();
+        if (appointments.isEmpty()) {
+            CustomValidationErrorResponse error = new CustomValidationErrorResponse(
+                    LocalDateTime.now(),
+                    HttpStatus.NO_CONTENT.value(),
+                    HttpStatus.NO_CONTENT.getReasonPhrase(),
+                    List.of("No appointments exist")
+            );
+            return new ResponseEntity<>(error, HttpStatus.NO_CONTENT);
+        }
+        return ResponseEntity.ok(appointments);
     }
 
     @PostMapping
