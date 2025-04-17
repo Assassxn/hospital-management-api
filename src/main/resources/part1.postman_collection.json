@@ -267,7 +267,7 @@
 					"response": []
 				},
 				{
-					"name": "Update Doctor By Id Failure",
+					"name": "Delete Doctor By Id Failure",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -285,7 +285,7 @@
 					"response": []
 				},
 				{
-					"name": "Update Doctor By Id Success",
+					"name": "Delete Doctor By Id Success",
 					"request": {
 						"method": "DELETE",
 						"header": [],

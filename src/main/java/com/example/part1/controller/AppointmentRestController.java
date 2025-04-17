@@ -51,7 +51,7 @@ public class AppointmentRestController {
         Appointment newAppointment = new Appointment();
         newAppointment.setAppointmentDate(appointment.getAppointmentDate());
         newAppointment.setNotes(appointment.getNotes());
-        newAppointment.setStatus(String.valueOf(AppointmentStatus.SCHEDULED)); // since we're creating a new appointment, set status to SCHEDULED
+        newAppointment.setStatus(AppointmentStatus.SCHEDULED); // since we're creating a new appointment, set status to SCHEDULED
 
         // no need to validate patientId as it is already validated in the DTO
         Patient patient = patientRepository.findPatientById(appointment.getPatientId());
@@ -102,7 +102,7 @@ public class AppointmentRestController {
         existingAppointment.setPatient(patient);
         existingAppointment.setNotes(appointment.getNotes());
         existingAppointment.setAppointmentDate(appointment.getAppointmentDate());
-        existingAppointment.setStatus(appointment.getStatus());
+        existingAppointment.setStatus(AppointmentStatus.valueOf(appointment.getStatus()));
 
         Appointment newAppointment = appointmentRepository.save(existingAppointment);
         return ResponseEntity.ok(newAppointment);

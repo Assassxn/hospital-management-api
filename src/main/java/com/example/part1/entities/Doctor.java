@@ -1,6 +1,6 @@
 package com.example.part1.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -10,14 +10,14 @@ import java.util.List;
 public class Doctor {
     @Id
     @GeneratedValue
-    Long id;
-    String name;
-    String specialisation;
-    String email;
-    String phoneNumber;
+    private Long id;
+    private String name;
+    private String specialisation;
+    private String email;
+    private String phoneNumber;
 
-    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @JsonBackReference
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference("doctorAppointments")
     private List<Appointment> appointments = new ArrayList<>();
 
     public Long getId() {

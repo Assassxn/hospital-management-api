@@ -48,7 +48,10 @@ public class MedicalRecordRestController {
         newMedicalRecord.setNotes(medicalRecord.getNotes());
         newMedicalRecord.setRecordDate(Timestamp.valueOf(LocalDateTime.now()));
         newMedicalRecord.setAppointment(appointment);
+        newMedicalRecord.setPatient(appointment.getPatient());
 
-        return ResponseEntity.created(null).body(medicalRecordRepository.save(newMedicalRecord));
+        MedicalRecord createdMedicalRecord = medicalRecordRepository.save(newMedicalRecord);
+        System.out.println("Created medical record: " + createdMedicalRecord);
+        return ResponseEntity.created(null).body(createdMedicalRecord);
     }
 }

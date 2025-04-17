@@ -1,6 +1,6 @@
 package com.example.part1.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -10,15 +10,19 @@ import java.util.List;
 public class Patient {
     @Id
     @GeneratedValue
-    Long id;
-    String name;
-    String email;
-    String phoneNumber;
-    String address;
+    private Long id;
+    private String name;
+    private String email;
+    private String phoneNumber;
+    private String address;
+
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JsonManagedReference("patientAppointments")
+    private List<Appointment> appointments = new ArrayList<>();
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @JsonBackReference
-    private List<Appointment> appointments = new ArrayList<>();
+    @JsonManagedReference("patientMedicalRecord")
+    private List<MedicalRecord> medicalRecords = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -66,5 +70,13 @@ public class Patient {
 
     public void setAppointments(List<Appointment> appointments) {
         this.appointments = appointments;
+    }
+
+    public List<MedicalRecord> getMedicalRecords() {
+        return medicalRecords;
+    }
+
+    public void setMedicalRecords(List<MedicalRecord> medicalRecords) {
+        this.medicalRecords = medicalRecords;
     }
 }

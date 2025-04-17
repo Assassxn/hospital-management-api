@@ -1,24 +1,36 @@
 package com.example.part1.entities;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
-
 @Entity
 public class MedicalRecord {
     @Id
     @GeneratedValue
-    Long id;
-    @JsonProperty("record_date")
-    Timestamp recordDate;
-    String diagnosis;
-    String treatment;
-    String notes;
+    private Long id;
+    private Timestamp recordDate;
+    private String diagnosis;
+    private String treatment;
+    private String notes;
 
     @OneToOne
-    @JoinColumn(name = "appointment_id", nullable = false)
+    @JsonBackReference("appointmentMedicalRecord")
     private Appointment appointment;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonBackReference("patientMedicalRecord")
+    private Patient patient;
+
+    // Helper method to break the relationship
+    public void unlinkAppointment() {
+        if (this.appointment != null) {
+            this.appointment.setMedicalRecord(null); // Remove the forward-reference
+            this.appointment = null; // Remove the back-reference
+        }
+    }
+
+    public MedicalRecord() {}
 
     public MedicalRecord(MedicalRecord medicalRecord) {
         this.id = medicalRecord.id;
@@ -29,9 +41,7 @@ public class MedicalRecord {
         this.appointment = medicalRecord.appointment;
     }
 
-    public MedicalRecord() {
-    }
-
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -78,5 +88,13 @@ public class MedicalRecord {
 
     public void setAppointment(Appointment appointment) {
         this.appointment = appointment;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 }

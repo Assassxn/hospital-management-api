@@ -5,28 +5,35 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
-
 @Entity
 public class Appointment {
     @Id
-    @GeneratedValue
-    Long id; // use as primary key
-    Timestamp appointmentDate;
-    AppointmentStatus status = AppointmentStatus.SCHEDULED;
-    String notes;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private Timestamp appointmentDate;
+    private AppointmentStatus status = AppointmentStatus.SCHEDULED;
+    private String notes;
 
-    @ManyToOne
-    @JoinColumn(name = "patient_id", nullable = false)
-    private Patient patient;
-
-    @ManyToOne
-    @JoinColumn(name = "doctor_id", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonBackReference("doctorAppointments")
     private Doctor doctor;
 
-    @OneToOne(mappedBy = "appointment", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonBackReference
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonBackReference("patientAppointments")
+    private Patient patient;
+
+    @OneToOne(mappedBy = "appointment", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
     private MedicalRecord medicalRecord;
 
+    // Automatically unlink the MedicalRecord before deletion
+    @PreRemove
+    private void unlinkMedicalRecord() {
+        if (this.medicalRecord != null) {
+            this.medicalRecord.unlinkAppointment();
+        }
+    }
+
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -47,8 +54,8 @@ public class Appointment {
         return status;
     }
 
-    public void setStatus(String status) {
-        this.status = AppointmentStatus.valueOf(status);
+    public void setStatus(AppointmentStatus status) {
+        this.status = status;
     }
 
     public String getNotes() {
@@ -59,20 +66,20 @@ public class Appointment {
         this.notes = notes;
     }
 
-    public Patient getPatient() {
-        return patient;
-    }
-
-    public void setPatient(Patient patient) {
-        this.patient = patient;
-    }
-
     public Doctor getDoctor() {
         return doctor;
     }
 
     public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 
     public MedicalRecord getMedicalRecord() {
