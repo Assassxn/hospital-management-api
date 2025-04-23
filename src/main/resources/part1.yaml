@@ -80,7 +80,7 @@ paths:
       summary: List all patients
       responses:
         '200':
-          description: List of patients
+          description: listOfPatients
           content:
             application/json:
               schema:
@@ -88,7 +88,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Patient'
         '404':
-          description: No patients found
+          description: noPatientsFound
     post:
       tags:
         - Patients
@@ -101,9 +101,9 @@ paths:
               $ref: '#/components/schemas/Patient'
       responses:
         '201':
-          description: Patient created
+          description: patientCreated
         '400':
-          description: Invalid patient data
+          description: invalidPatientData
   /patients/{id}:
     get:
       tags:
@@ -118,13 +118,13 @@ paths:
             format: int64
       responses:
         '200':
-          description: Patient found
+          description: patientFound
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Patient'
         '404':
-          description: Patient not found
+          description: patientNotFound
     put:
       tags:
         - Patients
@@ -144,9 +144,9 @@ paths:
               $ref: '#/components/schemas/Patient'
       responses:
         '200':
-          description: Patient updated
+          description: patientUpdated
         '404':
-          description: Patient not found
+          description: patientNotFound
     delete:
       tags:
         - Patients
@@ -160,9 +160,9 @@ paths:
             format: int64
       responses:
         '204':
-          description: Patient deleted
+          description: patientDeleted
         '404':
-          description: Patient not found
+          description: patientNotFound
   /patients/{id}/appointments:
     get:
       tags:
@@ -177,7 +177,7 @@ paths:
             format: int64
       responses:
         '200':
-          description: List of appointments
+          description: listOfAppointments
           content:
             application/json:
               schema:
@@ -185,7 +185,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Appointment'
         '404':
-          description: Patient not found
+          description: patientNotFound
   /patients/{id}/medical-records:
     get:
       tags:
@@ -200,7 +200,7 @@ paths:
             format: int64
       responses:
         '200':
-          description: List of medical records
+          description: listOfMedicalRecords
           content:
             application/json:
               schema:
@@ -208,7 +208,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/MedicalRecord'
         '404':
-          description: Patient not found
+          description: patientNotFound
   /doctors:
     get:
       tags:
@@ -216,7 +216,7 @@ paths:
       summary: List all doctors
       responses:
         '200':
-          description: List of doctors
+          description: listOfDoctors
           content:
             application/json:
               schema:
@@ -224,7 +224,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Doctor'
         '404':
-          description: No doctors found
+          description: noDoctorsFound
   /doctors/{id}:
     get:
       tags:
@@ -239,13 +239,13 @@ paths:
             format: int64
       responses:
         '200':
-          description: Doctor found
+          description: doctorFound
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Doctor'
         '404':
-          description: Doctor not found
+          description: doctorNotFound
     put:
       tags:
         - Doctors
@@ -265,9 +265,9 @@ paths:
               $ref: '#/components/schemas/Doctor'
       responses:
         '200':
-          description: Doctor updated
+          description: doctorUpdated
         '404':
-          description: Doctor not found
+          description: doctorNotFound
     delete:
       tags:
         - Doctors
@@ -281,9 +281,9 @@ paths:
             format: int64
       responses:
         '204':
-          description: Doctor deleted
+          description: doctorDeleted
         '404':
-          description: Doctor not found
+          description: doctorNotFound
     post:
       tags:
         - Doctors
@@ -303,9 +303,9 @@ paths:
               $ref: '#/components/schemas/Doctor'
       responses:
         '201':
-          description: Doctor created
+          description: doctorCreated
         '400':
-          description: Invalid doctor data
+          description: invalidDoctorData
   /doctors/{id}/appointments:
     get:
       tags:
@@ -320,7 +320,7 @@ paths:
             format: int64
       responses:
         '200':
-          description: List of appointments
+          description: listOfAppointments
           content:
             application/json:
               schema:
@@ -328,7 +328,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Appointment'
         '404':
-          description: Doctor not found
+          description: doctorNotFound
   /appointments:
     get:
       tags:
@@ -336,7 +336,7 @@ paths:
       summary: List all appointments
       responses:
         '200':
-          description: List of appointments
+          description: listOfAppointments
           content:
             application/json:
               schema:
@@ -344,7 +344,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Appointment'
         '404':
-          description: No appointments found
+          description: noAppointmentsFound
     post:
       tags:
         - Appointments
@@ -357,9 +357,9 @@ paths:
               $ref: '#/components/schemas/Appointment'
       responses:
         '201':
-          description: Appointment created
+          description: appointmentCreated
         '400':
-          description: Invalid appointment data
+          description: invalidAppointmentData
   /appointments/{id}:
     get:
       tags:
@@ -374,13 +374,13 @@ paths:
             format: int64
       responses:
         '200':
-          description: Appointment found
+          description: appointmentFound
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Appointment'
         '404':
-          description: Appointment not found
+          description: appointmentNotFound
     put:
       tags:
         - Appointments
@@ -400,9 +400,9 @@ paths:
               $ref: '#/components/schemas/Appointment'
       responses:
         '200':
-          description: Appointment updated
+          description: appointmentUpdated
         '404':
-          description: Appointment not found
+          description: appointmentNotFound
     delete:
       tags:
         - Appointments
@@ -416,9 +416,9 @@ paths:
             format: int64
       responses:
         '204':
-          description: Appointment deleted
+          description: appointmentDeleted
         '404':
-          description: Appointment not found
+          description: appointmentNotFound
   /appointments/{id}/medical-record:
     get:
       tags:
@@ -433,7 +433,7 @@ paths:
             format: int64
       responses:
         '200':
-          description: List of medical records
+          description: listOfMedicalRecords
           content:
             application/json:
               schema:
@@ -441,7 +441,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/MedicalRecord'
         '404':
-          description: Appointment not found
+          description: appointmentNotFound
   /medical-records:
     post:
       tags:
@@ -455,6 +455,6 @@ paths:
               $ref: '#/components/schemas/MedicalRecord'
       responses:
         '201':
-          description: Medical record created
+          description: medicalRecordCreated
         '400':
-          description: Invalid medical record data
+          description: invalidMedicalRecordData
