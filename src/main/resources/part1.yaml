@@ -89,6 +89,8 @@ paths:
                   $ref: '#/components/schemas/Patient'
         '404':
           description: noPatientsFound
+        '204':
+          description: noPatientsAvailable
     post:
       tags:
         - Patients
@@ -225,6 +227,8 @@ paths:
                   $ref: '#/components/schemas/Doctor'
         '404':
           description: noDoctorsFound
+        '204':
+          description: noDoctorsAvailable
   /doctors/{id}:
     get:
       tags:
