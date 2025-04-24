@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/patients")
@@ -134,10 +133,7 @@ public class PatientRestController {
             return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
         }
 
-        List<MedicalRecord> records = patient.getAppointments().stream()
-                .map(Appointment::getMedicalRecord)
-                .map(MedicalRecord::new)
-                .collect(Collectors.toList());
+        List<MedicalRecord> records = patient.getMedicalRecords();
         return ResponseEntity.ok(records);
     }
 }
